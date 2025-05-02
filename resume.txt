@@ -1,0 +1,44 @@
+MANTHAN SARAWADE
+Pune | manthantsarwade@gmail.com | +91 9028417699
+
+SUMMARY
+
+Experienced IT Professional with over 2 years of experience having expertise in handling production
+issues. Proficient in analyzing, designing, developing, building, deploying, and maintaining IT solutions.
+Adept at troubleshooting and optimizing system performance. Seeking a Java Full Stack Developer role
+to leverage my skills in Java, Spring Boot, ReactJS, and database management.
+
+PROFESSIONAL EXPERIENCE
+
+Cognizant - FullStack Developer (Programmer Analyst) | Feb 2022 - Feb 2024
+Part of the Client Data Operations team under Cognizant's Data Dimensions Platform.
+Built a POC for a Data Intake Platform using in-house tools.
+Supported ETL-based ingestion from emails and documents (PDF, Excel, Word, images).
+Helped structure unstructured data for downstream processing.
+Automated data intake as part of an EDM solution, improving accuracy and reducing manual effort.
+Collaborated with cross-functional teams to validate data flow and ensure processing quality.
+
+EDUCATION
+
+Bachelor of Printing Engineering
+PVG COET, Pune
+Aug 2017 - July 2021
+
+Post Graduate Diploma in Advanced Computing
+CDAC (Sunbeam, Pune)
+Aug 2024 - Feb 2025
+
+TECHNICAL SKILLS
+
+PG-DAC - 2025
+Employee Task Management System
+Platform: Java, MySQL, J2EE, Spring Data JPA, React JS, RESTful API Programming, Docker, AWS-CodePipeline
+
+The Employee Task Management System is a software application designed to help organizations
+efficiently manage and monitor employee tasks, ensuring smooth workflow and improved
+productivity.
+
+ADDITIONAL INFORMATION
+
+Languages: English
+Passport: U9709110 
