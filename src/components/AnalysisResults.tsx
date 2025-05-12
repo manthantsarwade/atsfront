@@ -79,7 +79,7 @@ Suggestion: ${i.suggestion}
       return (
         <div 
           ref={resumePreviewRef} 
-          className="whitespace-pre-wrap font-mono text-sm bg-white p-4 rounded-lg h-[420px] overflow-y-auto border border-gray-200 shadow-inner"
+          className="whitespace-pre-wrap font-sans text-sm bg-white p-4 rounded-lg h-[350px] overflow-y-auto border border-gray-200 shadow-inner"
         >
           {resumeText}
         </div>
@@ -138,7 +138,7 @@ Suggestion: ${i.suggestion}
     return (
       <div 
         ref={resumePreviewRef} 
-        className="whitespace-pre-wrap font-mono text-sm bg-white p-4 rounded-lg h-[420px] overflow-y-auto border border-gray-200 shadow-inner"
+        className="whitespace-pre-wrap font-sans text-sm bg-white p-4 rounded-lg h-[350px] overflow-y-auto border border-gray-200 shadow-inner"
       >
         {segments.map((segment, idx) => {
           if (!segment.isHighlight) {
@@ -160,7 +160,7 @@ Suggestion: ${i.suggestion}
           return (
             <div
               key={idx}
-              className={`inline-block rounded px-1 py-0.5 my-0.5 ${
+              className={`inline-block rounded px-1.5 py-0.5 my-0.5 ${
                 isActiveIssue 
                   ? 'bg-red-100 border-l-4 border-red-500 animate-pulse' 
                   : 'bg-yellow-50 border-l-4 border-yellow-400'
@@ -184,55 +184,70 @@ Suggestion: ${i.suggestion}
 
   // New consistent card layout
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mx-auto max-w-7xl">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-4 w-full h-full">
       {/* First Card: Score */}
-      <div className="bg-white rounded-xl shadow p-5 flex flex-col items-center justify-center h-[480px]">
-        <h2 className="text-xl font-semibold mb-4 flex items-center">
+      <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center justify-start h-[450px]">
+        <h2 className="text-2xl font-semibold mb-4 flex items-center">
           Your Score
         </h2>
-        <div className="relative flex items-center justify-center w-32 h-32 my-4">
-          <svg className="absolute top-0 left-0" width="128" height="128">
-            <circle cx="64" cy="64" r="56" stroke="#e5e7eb" strokeWidth="12" fill="none" />
+        {/* Score Circle and Number in its own div */}
+        <div className="mb-4">
+          <svg className="w-32 h-32" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" stroke="#e5e7eb" strokeWidth="8" fill="none" />
             <circle
-              cx="64" cy="64" r="56"
+              cx="50"
+              cy="50"
+              r="45"
               stroke={getScoreStroke(score)}
-              strokeWidth="12"
+              strokeWidth="8"
               fill="none"
-              strokeDasharray={2 * Math.PI * 56}
-              strokeDashoffset={2 * Math.PI * 56 * (1 - score / 100)}
+              strokeDasharray={2 * Math.PI * 45}
+              strokeDashoffset={2 * Math.PI * 45 * (1 - score / 100)}
               strokeLinecap="round"
               style={{ transition: 'stroke-dashoffset 1s cubic-bezier(.4,2,.6,1)' }}
             />
+            <text
+              x="50"
+              y="56"
+              textAnchor="middle"
+              className={`text-5xl font-bold ${getScoreColor(score)}`}
+              fontSize="2.5rem"
+              fontFamily="inherit"
+              fill="currentColor"
+            >
+              {score}
+            </text>
           </svg>
-          <span className={`absolute text-4xl font-bold ${getScoreColor(score)}`}>{score}</span>
         </div>
-        <div className={`flex items-center justify-center gap-2 font-semibold ${getScoreColor(score)} mb-6`}>
-          {score >= 80 ? <CheckCircle className="w-5 h-5" /> : <AlertCircle className="w-5 h-5" />}
+        {/* Status Text in its own div, completely separate from the circle */}
+        <div className={`flex items-center justify-center gap-2 text-lg font-semibold ${getScoreColor(score)} mb-6 mt-8`}>
+          {score >= 80 ? <CheckCircle className="w-6 h-6" /> : <AlertCircle className="w-6 h-6" />}
           {score >= 80 ? 'Great Match!' : score >= 60 ? 'Needs Improvement' : 'Poor Match'}
         </div>
         {onReanalyze && (
           <Button 
             variant="outline" 
             onClick={onReanalyze} 
-            className="w-full flex items-center justify-center gap-2 mt-auto"
+            className="w-full flex items-center justify-center gap-2 mt-auto text-base"
+            size="lg"
           >
-            <RefreshCw className="w-4 h-4" /> Re-analyze Resume
+            <RefreshCw className="w-5 h-5" /> Re-analyze Resume
           </Button>
         )}
       </div>
 
       {/* Second Card: Suggestions */}
-      <div className="bg-white rounded-xl shadow p-5 flex flex-col h-[480px]">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold flex items-center gap-2">
-            <Info className="h-5 w-5 text-indigo-600" /> Suggestions
+      <div className="bg-white rounded-xl shadow p-6 flex flex-col h-[450px]">
+        <div className="flex justify-between items-center mb-3">
+          <h2 className="text-2xl font-semibold flex items-center gap-2">
+            <Info className="h-6 w-6 text-indigo-600" /> Suggestions
           </h2>
           <Button variant="ghost" size="icon" onClick={handleDownload} title="Download Suggestions">
-            <Download className="w-4 h-4" />
+            <Download className="w-5 h-5" />
           </Button>
         </div>
         
-        <ScrollArea className="flex-grow pr-4">
+        <ScrollArea className="flex-grow pr-4 pt-1">
           {errorIssue ? (
             <div className="p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded">
               <strong>Error:</strong> {errorIssue.issue}<br />
@@ -256,8 +271,8 @@ Suggestion: ${i.suggestion}
                     </span>
                     {issue.section}
                   </h4>
-                  <p className="text-xs text-red-700 font-medium ml-7 mb-1">{issue.issue}</p>
-                  <p className="text-xs text-gray-600 ml-7 bg-green-50 p-1.5 rounded border border-green-100">
+                  <p className="text-sm text-red-700 font-medium ml-7 mb-1">{issue.issue}</p>
+                  <p className="text-sm text-gray-600 ml-7 bg-green-50 p-1.5 rounded border border-green-100">
                     <strong>Suggestion:</strong> {issue.suggestion}
                   </p>
                 </div>
@@ -266,7 +281,7 @@ Suggestion: ${i.suggestion}
           )}
         </ScrollArea>
         
-        <div className="mt-3 pt-3 border-t flex justify-end">
+        <div className="mt-3 pt-2 border-t flex justify-end">
           <Button variant="outline" size="sm" onClick={() => setShowDebug(v => !v)}>
             {showDebug ? 'Hide Debug' : 'Show Debug'}
           </Button>
@@ -274,10 +289,10 @@ Suggestion: ${i.suggestion}
       </div>
 
       {/* Third Card: Resume Preview */}
-      <div className="bg-white rounded-xl shadow p-5 flex flex-col h-[480px]">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold flex items-center gap-2">
-            <FileText className="h-5 w-5 text-indigo-600" /> Resume Preview
+      <div className="bg-white rounded-xl shadow p-6 flex flex-col h-[450px]">
+        <div className="flex justify-between items-center mb-3">
+          <h2 className="text-2xl font-semibold flex items-center gap-2">
+            <FileText className="h-6 w-6 text-indigo-600" /> Resume Preview
           </h2>
           <div className="flex gap-2">
             <Button 
@@ -297,7 +312,7 @@ Suggestion: ${i.suggestion}
               Highlighted
             </Button>
             <Button variant="ghost" size="icon" onClick={handleCopy} title="Copy Resume Text">
-              <Copy className="w-4 h-4" />
+              <Copy className="w-5 h-5" />
             </Button>
           </div>
         </div>
